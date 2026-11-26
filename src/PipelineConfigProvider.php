@@ -10,6 +10,7 @@ namespace Componenta\Http\Middleware;
  */
 final class PipelineConfigProvider extends \Componenta\Config\ConfigProvider
 {
+    /** @return array<class-string, class-string> */
     protected function getInvokables(): array
     {
         return [PipelineFactoryInterface::class => PipelineFactory::class];

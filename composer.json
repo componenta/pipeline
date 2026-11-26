@@ -54,7 +54,6 @@
             ]
         },
         "branch-alias": {
-            "dev-fix/callback-dependency-baseline-2026-11-26": "1.0.x-dev",
             "dev-fix/pipeline-audit": "1.1.x-dev",
             "dev-main": "1.1.x-dev"
         }

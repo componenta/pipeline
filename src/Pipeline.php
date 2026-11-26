@@ -120,7 +120,12 @@ final class Pipeline implements PipelineInterface
 
             throw new InvalidArgumentException(
                 $position !== null
-                    ? sprintf('Middleware at position %s must implement %s, %s given', is_int($position) || is_string($position) ? (string) $position : get_debug_type($position), MiddlewareInterface::class, $type)
+                    ? sprintf(
+                        'Middleware at position %s must implement %s, %s given',
+                        is_int($position) || is_string($position) ? (string) $position : get_debug_type($position),
+                        MiddlewareInterface::class,
+                        $type,
+                    )
                     : "Middleware must implement " . MiddlewareInterface::class . ", $type given"
             );
         }

@@ -15,7 +15,7 @@ interface PipelineFactoryInterface
 {
     /**
      * Creates a new pipeline. When $fallbackHandler is null, implementations
-     * install a default handler that signals misconfiguration of an empty
+     * install a default handler that signals exhaustion of the
      * pipeline (see {@see EmptyPipelineHandler}).
      *
      * @param iterable<MiddlewareInterface> $middlewares
