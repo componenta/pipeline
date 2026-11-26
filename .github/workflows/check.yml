@@ -27,3 +27,27 @@ jobs:
       - run: composer check
       - run: composer benchmark
         if: matrix.php == '8.5' && matrix.config == '4.0'
+
+  container-integration:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - php: '8.4'
+            di: '^5.0.7'
+            config: '^3.0'
+          - php: '8.5'
+            di: 'dev-main as 6.0.x-dev'
+            config: '^4.0'
+    steps:
+      - uses: actions/checkout@v7
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          tools: composer:v2
+      - run: composer config repositories.componenta-di vcs https://github.com/componenta/di
+      - run: composer require --dev --no-update 'componenta/di:${{ matrix.di }}' 'componenta/config:${{ matrix.config }}'
+      - run: composer update --no-interaction --prefer-dist
+      - run: php tests/config-consumer.php

@@ -79,9 +79,9 @@ $pipeline = $factory->createMiddlewarePipeline(
 | Pipeline passed as its own handler to `process()` | `RuntimeException` |
 | Chain exhausted without a custom fallback | `RuntimeException` |
 
-## Config 4 integration
+## Container integration
 
-The configuration provider supports Config 4 alongside Config 1, 2 and 3. In a consumer with Config 4, DI 6, and the current package installed, verify provider wiring with:
+The configuration provider supports Config 4 alongside Config 1, 2 and 3. The provider is tested with Config 3 / DI 5 and Config 4 / DI 6. In a consumer with one of those stacks and the current package installed, verify provider wiring with:
 
 ```sh
 php tests/config-consumer.php /path/to/consumer/vendor/autoload.php

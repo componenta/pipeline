@@ -75,9 +75,9 @@ $pipeline = $factory->createMiddlewarePipeline(
 | Pipeline передан как собственный обработчик в `process()` | `RuntimeException` |
 | Цепочка исчерпана без собственного запасного обработчика | `RuntimeException` |
 
-## Интеграция с Config 4
+## Интеграция с контейнером
 
-Провайдер конфигурации поддерживает Config 4 и прежние ветки Config 1, 2 и 3. В потребителе с Config 4, DI 6 и текущим пакетом проверьте регистрацию сервисов командой:
+Провайдер конфигурации поддерживает Config 4 и прежние ветки Config 1, 2 и 3. Провайдер проверяется с Config 3 / DI 5 и Config 4 / DI 6. В приложении с одним из этих наборов зависимостей проверьте регистрацию сервисов командой:
 
 ```sh
 php tests/config-consumer.php /path/to/consumer/vendor/autoload.php

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require $argv[1];
+require $argv[1] ?? dirname(__DIR__) . '/vendor/autoload.php';
 
 use Componenta\Config\ConfigFactory;
 use Componenta\Config\Environment;
@@ -41,4 +41,4 @@ if ($response->getStatusCode() !== 201
     throw new RuntimeException('The configured factory must preserve middleware and fallback execution.');
 }
 
-echo 'Config 4 + DI 6 pipeline provider passed.', PHP_EOL;
+echo 'Pipeline provider and container integration passed.', PHP_EOL;
