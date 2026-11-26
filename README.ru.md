@@ -74,3 +74,11 @@ $pipeline = $factory->createMiddlewarePipeline(
 | Pipeline добавлен сам в себя через `pipe()` | `RuntimeException` |
 | Pipeline передан как собственный обработчик в `process()` | `RuntimeException` |
 | Пустой pipeline вызван без собственного запасного обработчика | `RuntimeException` |
+
+## Интеграция с Config 4
+
+Провайдер конфигурации поддерживает Config 4 и прежние ветки Config 1 и 2. В потребителе с Config 4, DI 6 и текущим пакетом проверьте регистрацию сервисов командой:
+
+```sh
+php tests/config-consumer.php /path/to/consumer/vendor/autoload.php
+```

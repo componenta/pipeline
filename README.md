@@ -78,3 +78,11 @@ $pipeline = $factory->createMiddlewarePipeline(
 | Pipeline appended to itself via `pipe()` | `RuntimeException` |
 | Pipeline passed as its own handler to `process()` | `RuntimeException` |
 | Empty pipeline invoked without a custom fallback | `RuntimeException` |
+
+## Config 4 integration
+
+The configuration provider supports Config 4 alongside the existing Config 1 and 2 lines. In a consumer with Config 4, DI 6, and the current package installed, verify provider wiring with:
+
+```sh
+php tests/config-consumer.php /path/to/consumer/vendor/autoload.php
+```
