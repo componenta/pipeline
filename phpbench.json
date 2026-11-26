@@ -1,0 +1,6 @@
+{
+    "runner": {
+        "bootstrap": "vendor/autoload.php",
+        "path": "benchmarks"
+    }
+}

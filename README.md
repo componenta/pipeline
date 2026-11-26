@@ -81,8 +81,12 @@ $pipeline = $factory->createMiddlewarePipeline(
 
 ## Config 4 integration
 
-The configuration provider supports Config 4 alongside the existing Config 1 and 2 lines. In a consumer with Config 4, DI 6, and the current package installed, verify provider wiring with:
+The configuration provider supports Config 4 alongside Config 1, 2 and 3. In a consumer with Config 4, DI 6, and the current package installed, verify provider wiring with:
 
 ```sh
 php tests/config-consumer.php /path/to/consumer/vendor/autoload.php
 ```
+
+## Development
+
+Run `composer test`, `composer phpstan`, and `composer benchmark`. Benchmarks measure construction, cold and warm handling, and nested processing separately. Middleware instances are shared when deriving pipelines; only the ordered collection is immutable. Nested pipelines use the supplied continuation rather than their own fallback.
