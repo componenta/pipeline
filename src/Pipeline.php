@@ -113,14 +113,14 @@ final class Pipeline implements PipelineInterface
      */
     private function validateMiddleware(
         mixed $middleware,
-        string|int|null $position = null,
+        mixed $position = null,
     ): void {
         if (!$middleware instanceof MiddlewareInterface) {
             $type = get_debug_type($middleware);
 
             throw new InvalidArgumentException(
                 $position !== null
-                    ? "Middleware at position $position must implement " . MiddlewareInterface::class . ", $type given"
+                    ? sprintf('Middleware at position %s must implement %s, %s given', is_int($position) || is_string($position) ? (string) $position : get_debug_type($position), MiddlewareInterface::class, $type)
                     : "Middleware must implement " . MiddlewareInterface::class . ", $type given"
             );
         }

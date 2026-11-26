@@ -39,7 +39,7 @@ $pipeline = new Pipeline(
 $response = $pipeline->handle($request);
 ```
 
-If no `fallbackHandler` is supplied, `EmptyPipelineHandler` is installed and throws `RuntimeException` on invocation — this surfaces misconfiguration of an empty pipeline.
+If no `fallbackHandler` is supplied, `EmptyPipelineHandler` is installed and throws `RuntimeException` on invocation — this surfaces a chain that reaches its terminal without producing a response.
 
 ### Nested pipelines
 
@@ -77,7 +77,7 @@ $pipeline = $factory->createMiddlewarePipeline(
 | Non-middleware element in constructor / `pipe()` | `InvalidArgumentException` |
 | Pipeline appended to itself via `pipe()` | `RuntimeException` |
 | Pipeline passed as its own handler to `process()` | `RuntimeException` |
-| Empty pipeline invoked without a custom fallback | `RuntimeException` |
+| Chain exhausted without a custom fallback | `RuntimeException` |
 
 ## Config 4 integration
 

@@ -329,3 +329,40 @@ describe('Pipeline as nested middleware (PSR-15 composition)', function () {
             ->and($result)->toBe($shortCircuitResponse);
     });
 });
+
+
+describe('iterable keys and terminal exhaustion', function () {
+    it('accepts arbitrary generator keys in constructor and pipe', function () {
+        $log = [];
+        $first = new RecordingMiddleware('first', $log);
+        $second = new RecordingMiddleware('second', $log);
+        $terminal = new RecordingHandler(new Response());
+        $items = static function (MiddlewareInterface $middleware): Generator {
+            yield new stdClass() => $middleware;
+        };
+        $original = new Pipeline($items($first), $terminal);
+        $derived = $original->pipe($items($second));
+        $original->handle(new ServerRequest('GET', '/'));
+        $derived->handle(new ServerRequest('GET', '/'));
+
+        expect($log)->toBe(['first', 'first', 'second'])
+            ->and($terminal->calls)->toBe(2);
+    });
+
+    it('reports an invalid middleware with an object key as a validation error', function () {
+        $items = static function (): Generator {
+            yield new stdClass() => false;
+        };
+
+        expect(fn () => new Pipeline($items()))->toThrow(InvalidArgumentException::class, 'position stdClass')
+            ->and(fn () => (new Pipeline())->pipe($items()))->toThrow(InvalidArgumentException::class, 'position stdClass');
+    });
+
+    it('reports exhaustion even if the chain was not empty', function () {
+        $log = [];
+        $pipeline = new Pipeline([new RecordingMiddleware('first', $log)]);
+        expect(fn () => $pipeline->handle(new ServerRequest('GET', '/')))
+            ->toThrow(RuntimeException::class, 'exhausted');
+        expect($log)->toBe(['first']);
+    });
+});

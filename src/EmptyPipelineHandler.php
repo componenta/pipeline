@@ -23,6 +23,6 @@ final class EmptyPipelineHandler implements RequestHandlerInterface
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        throw new RuntimeException('Failed to process the request. The pipeline is empty!');
+        throw new RuntimeException('Failed to process the request: the middleware chain was exhausted without a response.');
     }
 }

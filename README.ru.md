@@ -35,7 +35,7 @@ $pipeline = new Pipeline(
 $response = $pipeline->handle($request);
 ```
 
-Если `fallbackHandler` не передан, устанавливается `EmptyPipelineHandler`, который бросает `RuntimeException` при вызове. Так пустой конвейер без финального обработчика сразу проявляет ошибку конфигурации.
+Если `fallbackHandler` не передан, устанавливается `EmptyPipelineHandler`, который бросает `RuntimeException` при вызове. Так обнаруживается исчерпание цепочки, если ни один обработчик не сформировал ответ.
 
 ### Вложенные конвейеры
 
@@ -73,7 +73,7 @@ $pipeline = $factory->createMiddlewarePipeline(
 | В конструктор или `pipe()` передан объект, не реализующий `MiddlewareInterface` | `InvalidArgumentException` |
 | Pipeline добавлен сам в себя через `pipe()` | `RuntimeException` |
 | Pipeline передан как собственный обработчик в `process()` | `RuntimeException` |
-| Пустой pipeline вызван без собственного запасного обработчика | `RuntimeException` |
+| Цепочка исчерпана без собственного запасного обработчика | `RuntimeException` |
 
 ## Интеграция с Config 4
 
