@@ -24,6 +24,7 @@ jobs:
           tools: composer:v2
       - run: composer validate --strict
       - run: composer update --no-interaction --prefer-dist --with componenta/config:^${{ matrix.config }}
+      - run: composer audit --locked --no-dev
       - run: composer check
       - run: composer benchmark
         if: matrix.php == '8.5' && matrix.config == '4.0'
@@ -50,4 +51,5 @@ jobs:
       - run: composer config repositories.componenta-di vcs https://github.com/componenta/di
       - run: composer require --dev --no-update 'componenta/di:${{ matrix.di }}' 'componenta/config:${{ matrix.config }}'
       - run: composer update --no-interaction --prefer-dist
+      - run: composer audit --locked --no-dev
       - run: php tests/config-consumer.php
