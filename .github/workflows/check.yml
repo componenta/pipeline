@@ -25,3 +25,5 @@ jobs:
       - run: composer validate --strict
       - run: composer update --no-interaction --prefer-dist --with componenta/config:^${{ matrix.config }}
       - run: composer check
+      - run: composer benchmark
+        if: matrix.php == '8.5' && matrix.config == '4.0'
