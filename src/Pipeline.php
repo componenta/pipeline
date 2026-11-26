@@ -44,12 +44,13 @@ final class Pipeline implements PipelineInterface
         iterable $middlewares = [],
         RequestHandlerInterface $fallbackHandler = new EmptyPipelineHandler,
     ) {
+        // Reject reinitialization before altering the collection or its cached chain.
+        $this->fallbackHandler = $fallbackHandler;
+
         foreach ($middlewares as $position => $middleware) {
             $this->validateMiddleware($middleware, $position);
             $this->middlewares[] = $middleware;
         }
-
-        $this->fallbackHandler = $fallbackHandler;
     }
 
     /**
