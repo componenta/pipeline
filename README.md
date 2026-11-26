@@ -81,7 +81,7 @@ $pipeline = $factory->createMiddlewarePipeline(
 
 ## Container integration
 
-The configuration provider supports Config 4 alongside Config 1, 2 and 3. The provider is tested with Config 3 / DI 5 and Config 4 / DI 6. In a consumer with one of those stacks and the current package installed, verify provider wiring with:
+The configuration provider supports Config 4 alongside Config 1, 2 and 3. The provider is tested with Config 3 / DI 5 and Config 4 / DI 6. Applications can replace the default factory by overriding the alias for `PipelineFactoryInterface` in their own dependency configuration after the package provider. In a consumer with one of those stacks and the current package installed, verify provider wiring with:
 
 ```sh
 php tests/config-consumer.php /path/to/consumer/vendor/autoload.php
